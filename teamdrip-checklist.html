@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TeamDrip Website Action Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --brand: #1a1a1a;
+    --accent: #2563eb;
+    --red: #dc2626;
+    --yellow: #d97706;
+    --green: #16a34a;
+    --light: #f9fafb;
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  header {
+    background: #111;
+    color: white;
+    padding: 40px 48px 32px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  header h1 span { color: #60a5fa; }
+
+  header .subtitle {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-top: 6px;
+  }
+
+  .print-btn {
+    background: white;
+    color: #111;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .print-btn:hover { background: #e5e7eb; }
+
+  .progress-bar-wrap {
+    margin-top: 24px;
+    background: #333;
+    border-radius: 999px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .progress-bar { height: 100%; background: #60a5fa; border-radius: 999px; width: 0%; transition: width 0.5s; }
+  .progress-label { font-size: 0.78rem; color: #9ca3af; margin-top: 6px; }
+
+  /* CONTENT */
+  .container { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* SECTION */
+  .section { margin-bottom: 40px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .section-title { font-size: 1.1rem; font-weight: 700; }
+  .section-count { font-size: 0.78rem; color: var(--muted); margin-left: auto; }
+
+  /* CHECKLIST ITEMS */
+  .checklist { display: flex; flex-direction: column; gap: 10px; }
+
+  .item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: box-shadow 0.15s;
+  }
+
+  .item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .item.done { opacity: 0.5; }
+  .item.done .item-title { text-decoration: line-through; }
+
+  .checkbox {
+    width: 20px; height: 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .item.done .checkbox {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .checkbox-check {
+    color: white;
+    font-size: 12px;
+    display: none;
+  }
+  .item.done .checkbox-check { display: block; }
+
+  .item-body { flex: 1; }
+  .item-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
+  .item-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  .badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    height: fit-content;
+  }
+
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+
+  /* PHOTO SPECS */
+  .specs-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .specs-header {
+    background: #111;
+    color: white;
+    padding: 16px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .specs-body { padding: 20px; }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-label { color: var(--muted); }
+  .spec-value { font-weight: 600; }
+
+  .photo-tip {
+    background: #eff6ff;
+    border-left: 3px solid #2563eb;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 0.82rem;
+    color: #1e40af;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  /* COPY SUGGESTIONS */
+  .copy-block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .copy-header {
+    background: #f3f4f6;
+    padding: 10px 16px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .copy-body { padding: 14px 16px; font-size: 0.85rem; color: #374151; line-height: 1.6; }
+
+  .old-copy { background: #fef2f2; border-left: 3px solid #ef4444; padding: 10px 14px; border-radius: 4px; font-size: 0.82rem; color: #991b1b; margin-bottom: 8px; font-style: italic; }
+  .new-copy { background: #f0fdf4; border-left: 3px solid #22c55e; padding: 10px 14px; border-radius: 4px; font-size: 0.82rem; color: #166534; margin-bottom: 4px; }
+
+  /* SUMMARY BAR */
+  .summary {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .summary-item .s-val { font-size: 1.8rem; font-weight: 800; }
+  .summary-item .s-label { font-size: 0.75rem; color: var(--muted); }
+  .s-red { color: var(--red); }
+  .s-yellow { color: var(--yellow); }
+  .s-green { color: var(--green); }
+
+  @media print {
+    .print-btn { display: none; }
+    body { background: white; }
+    header { padding: 24px; }
+    .item { break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 24px; }
+    header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>TeamDrip <span>Website Action Plan</span></h1>
+      <div class="subtitle">teamdripbrand.com &nbsp;·&nbsp; Reviewed May 31, 2026 &nbsp;·&nbsp; Shopify Prestige Theme</div>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨 Print / Save PDF</button>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0 of 0 items complete — click items to check off as you go</div>
+</header>
+
+<div class="container">
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="summary-item"><div class="s-val s-red">9</div><div class="s-label">Urgent Fixes</div></div>
+    <div class="summary-item"><div class="s-val s-yellow">6</div><div class="s-label">Improvements</div></div>
+    <div class="summary-item"><div class="s-val s-green">5</div><div class="s-label">Working Well</div></div>
+    <div class="summary-item"><div class="s-val" style="color:#2563eb">1</div><div class="s-label">Photo Standard</div></div>
+  </div>
+
+  <!-- SECTION 1: URGENT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fee2e2;">🚨</div>
+      <div>
+        <div class="section-title">Urgent — Template Copy Still Showing (Replace First)</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:2px;">These sections still have Strass jewelry brand placeholder text — they need to go before anyone visits the site</div>
+      </div>
+    </div>
+
+    <div class="checklist" id="section1">
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">"The Design" section — remove Strass jewelry copy</div>
+          <div class="item-desc">Currently reads: "Strass embodies 'casual luxury' through fluid creations in 18k gold and natural stones, designed to be worn like a second skin. More than jewelry, we create modern amulets…" — Replace with TeamDrip's story/mission or remove the section entirely.</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">"Our Approach" quote — remove jewelry/gold content</div>
+          <div class="item-desc">Currently says: "We also favor more responsible jewelry by selecting stones from an ethical supply…using up to 100% recycled gold and platinum." Replace with your approach to apparel quality, customer service, or team partnerships.</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">"Summer Sales" — replace jewelry copy</div>
+          <div class="item-desc">Reads: "Shop our selection of exclusive rings, earrings, bracelets and necklaces at reduced prices." Replace with TeamDrip sale content, or remove/hide the section until you run an actual sale.</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">"Join us @strass" — change to @teamdripbrand</div>
+          <div class="item-desc">The Instagram/social section heading still says "@strass." Update to "@teamdripbrand" and make sure the link points to your actual Instagram.</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Four feature tiles — replace all jewelry descriptions</div>
+          <div class="item-desc">Current tiles say "Solid 18k Gold," "Modern Amulets," "Ethical Sparkle," "Made for You" with jewelry descriptions. Replace with TeamDrip values — e.g. Premium Embroidery, School-Licensed Designs, Custom Orders, Fast Turnaround (or whatever fits your brand pillars).</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">"Made in our Parisian workshop" — replace with TeamDrip story</div>
+          <div class="item-desc">This line appears in an image section. Replace with something true to TeamDrip — where you're based, your process, your team, etc.</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Testimonial — replace "Alison | Customer" placeholder</div>
+          <div class="item-desc">Current testimonial is a Strass jewelry review. Replace with a real TeamDrip customer quote — reach out to a school or customer you've worked with and ask for a short testimonial.</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Footer "About" text — fill in your actual brand description</div>
+          <div class="item-desc">Currently says: "Use this text area to tell your customers about your brand and vision. You can change it in the theme editor." This is a literal instruction placeholder — visitors can see it.</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Newsletter popup — replace placeholder description</div>
+          <div class="item-desc">Pop-up says: "Describe what your customers will receive when subscribing to your newsletter." Replace with something real like "Get early access to new drops, exclusive deals, and team apparel news."</div>
+        </div>
+        <div class="badge badge-red">Urgent</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: NEEDS ATTENTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fef3c7;">⚠️</div>
+      <div>
+        <div class="section-title">Needs Attention — Incomplete or Broken</div>
+      </div>
+    </div>
+
+    <div class="checklist" id="section2">
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Fix broken/missing image mid-page</div>
+          <div class="item-desc">There's a large blue placeholder box with a broken image icon roughly halfway down the page. Upload a real TeamDrip lifestyle photo or product image to replace it.</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">School logo carousel — fix broken links</div>
+          <div class="item-desc">The row of school/partner logos all link to "#" (dead links). Either link them to relevant collection pages or remove the section until you're ready to use it properly.</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Category banners — link to separate collections</div>
+          <div class="item-desc">"Embroidered Hoodies" and "Outerwear" banners both link to /collections/all instead of their own dedicated collections. Create separate Shopify collections for each category and update the links.</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Footer menu — add more links</div>
+          <div class="item-desc">Currently only has "Search" and "Privacy Choices." Add: About Us, Catalog/Shop, Contact, Shipping Policy, Return Policy. Customers expect to find these in the footer.</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Trust badges — fill in real policy info</div>
+          <div class="item-desc">Four trust badges (Free Delivery, Satisfied or Refunded, Top-notch Support, Secure Payments) all say "Short content about your store." Replace with your actual policies — e.g. "Free shipping on orders over $200" or "30-day returns."</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Magazine/Blog section — add real posts or hide it</div>
+          <div class="item-desc">Three "Blog post" placeholder tiles show up. Either write 2-3 short posts (e.g. "How to Order Custom Team Hoodies," "Behind the Design: U of Utah Collection") or remove/hide the section until you have content.</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">Countdown timer — tie to a real sale or remove</div>
+          <div class="item-desc">Currently set to expire December 31, 2027 — clearly a placeholder. If you're running a sale, set a real end date. If not, remove this section so it doesn't look fake to customers.</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkbox-check">✓</span></div>
+        <div class="item-body">
+          <div class="item-title">"Shop your set" — replace placeholder product</div>
+          <div class="item-desc">This section shows a product simply named "Product" for $49.99. Link to a real TeamDrip product or set, or hide the section until ready.</div>
+        </div>
+        <div class="badge badge-yellow">Fix It</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3: PHOTO SPECS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#dbeafe;">📐</div>
+      <div>
+        <div class="section-title">Product Photo Standard</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:2px;">Use these specs for ALL product photos going forward — consistency is everything</div>
+      </div>
+    </div>
+
+    <div class="specs-card">
+      <div class="specs-header">✅ Recommended Standard — All TeamDrip Product Photos</div>
+      <div class="specs-body">
+        <div class="spec-row">
+          <span class="spec-label">Ratio</span>
+          <span class="spec-value">1:1 (Square)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Dimensions</span>
+          <span class="spec-value">2048 × 2048 px minimum</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">File Format</span>
+          <span class="spec-value">JPG (smaller file size, faster load)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Background</span>
+          <span class="spec-value">Consistent — pure white (#FFFFFF) or brand neutral</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Max File Size</span>
+          <span class="spec-value">Under 1MB per image</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Color Profile</span>
+          <span class="spec-value">sRGB (standard web)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Product Placement</span>
+          <span class="spec-value">Centered, with ~5-10% padding on each side</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-tip">
+      💡 <strong>Already have photos that aren't square?</strong> Don't crop the product — add white space on the sides to pad them into a square. You can batch-do this in <strong>Canva</strong> (free) or <strong>Lightroom</strong>. Just open the image, set canvas to 1:1, and center the product. Takes about 30 seconds per photo.
+    </div>
+    <div class="photo-tip" style="background:#f0fdf4;border-color:#22c55e;color:#166534;margin-top:10px;">
+      📱 <strong>Shooting new photos?</strong> Set your iPhone to shoot square in the Camera app (swipe the format selector), or shoot wider and crop in post. Make sure lighting is consistent across all products — same background, same light setup every time. One great afternoon of shooting can get you all the photos you need.
+    </div>
+
+  </div>
+
+  <!-- SECTION 4: SUGGESTED COPY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f3f4f6;">✍️</div>
+      <div>
+        <div class="section-title">Suggested Replacement Copy</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:2px;">Ready-to-use copy for the key sections — customize as needed</div>
+      </div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-header">Footer "About" Section</div>
+      <div class="copy-body">
+        <div class="old-copy">❌ Current: "Use this text area to tell your customers about your brand and vision."</div>
+        <div class="new-copy">✅ Suggested: "TeamDrip creates premium custom team apparel that athletes actually want to wear. From embroidered hoodies to varsity jackets, we partner with schools, universities, and organizations across Utah to deliver gear that represents your team with pride."</div>
+      </div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-header">Newsletter Popup</div>
+      <div class="copy-body">
+        <div class="old-copy">❌ Current: "Describe what your customers will receive when subscribing to your newsletter."</div>
+        <div class="new-copy">✅ Suggested: "Get early access to new drops, exclusive deals, and behind-the-scenes looks at our latest team collections."</div>
+      </div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-header">Four Feature Tiles (replace Solid 18k Gold / Modern Amulets / etc.)</div>
+      <div class="copy-body">
+        <div class="new-copy">✅ Tile 1 — <strong>Premium Embroidery:</strong> "High-stitch count embroidery on every piece — built to last through seasons of wear."</div>
+        <div class="new-copy">✅ Tile 2 — <strong>School-Licensed Designs:</strong> "Officially licensed apparel for universities and high schools across Utah."</div>
+        <div class="new-copy">✅ Tile 3 — <strong>Custom Orders Welcome:</strong> "Need gear for your whole team? We handle group orders with a personal touch."</div>
+        <div class="new-copy">✅ Tile 4 — <strong>Gear Worth Wearing:</strong> "Premium quality your athletes will actually want to put on — on and off the field."</div>
+      </div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-header">Trust Badges (Free Delivery / Returns / Support / Payments)</div>
+      <div class="copy-body">
+        <div class="new-copy">✅ Badge 1 — <strong>Free Shipping:</strong> "Free standard shipping on all orders over $200."</div>
+        <div class="new-copy">✅ Badge 2 — <strong>Easy Returns:</strong> "Not happy? We'll make it right — 30-day return policy."</div>
+        <div class="new-copy">✅ Badge 3 — <strong>Real Support:</strong> "Questions? Reach us at [your email] — real humans, fast replies."</div>
+        <div class="new-copy">✅ Badge 4 — <strong>Secure Checkout:</strong> "All payments encrypted and processed securely through Shopify."</div>
+      </div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-header">Testimonial (placeholder until you get a real one)</div>
+      <div class="copy-body">
+        <div class="new-copy">✅ Suggested (or reach out to a real customer): "The quality blew us away — our whole team has been wearing these hoodies all season. We'll never go back to generic school apparel." — [Customer Name] | [School/Org]</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 5: WHAT'S WORKING -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#d1fae5;">✅</div>
+      <div>
+        <div class="section-title">What's Already Working</div>
+      </div>
+    </div>
+    <div class="checklist">
+      <div class="item" style="cursor:default;">
+        <div style="width:20px;height:20px;background:#16a34a;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:white;font-size:12px;">✓</div>
+        <div class="item-body"><div class="item-title">Hero image — strong visual, great brand feel</div><div class="item-desc">The opening banner with the models looks professional and on-brand. Keep it.</div></div>
+      </div>
+      <div class="item" style="cursor:default;">
+        <div style="width:20px;height:20px;background:#16a34a;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:white;font-size:12px;">✓</div>
+        <div class="item-body"><div class="item-title">Real products are live with pricing</div><div class="item-desc">U of Utah Signature Hoodies (red, cream, black) and the Premium Varsity Jacket are all showing correctly with prices.</div></div>
+      </div>
+      <div class="item" style="cursor:default;">
+        <div style="width:20px;height:20px;background:#16a34a;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:white;font-size:12px;">✓</div>
+        <div class="item-body"><div class="item-title">Instagram linked correctly to @teamdripbrand</div><div class="item-desc">Footer social link goes to the right account.</div></div>
+      </div>
+      <div class="item" style="cursor:default;">
+        <div style="width:20px;height:20px;background:#16a34a;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:white;font-size:12px;">✓</div>
+        <div class="item-body"><div class="item-title">Navigation is clean</div><div class="item-desc">Home / Catalog / Contact — simple, works well. No clutter.</div></div>
+      </div>
+      <div class="item" style="cursor:default;">
+        <div style="width:20px;height:20px;background:#16a34a;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:white;font-size:12px;">✓</div>
+        <div class="item-body"><div class="item-title">Payments fully set up</div><div class="item-desc">All major payment methods active: Visa, Mastercard, Amex, Apple Pay, Google Pay, Shop Pay, PayPal.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer style="background:#111;color:#9ca3af;text-align:center;padding:20px;font-size:0.78rem;">
+  TeamDrip Website Review &nbsp;·&nbsp; May 31, 2026 &nbsp;·&nbsp; <strong style="color:#60a5fa;">teamdripbrand.com</strong>
+</footer>
+
+<script>
+function toggle(el) {
+  el.classList.toggle('done');
+  updateProgress();
+}
+
+function updateProgress() {
+  const all = document.querySelectorAll('.item[onclick]');
+  const done = document.querySelectorAll('.item[onclick].done');
+  const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = done.length + ' of ' + all.length + ' items complete';
+}
+
+updateProgress();
+</script>
+</body>
+</html>
