@@ -134,7 +134,7 @@
       <div class="legend-item"><div class="legend-dot c1"></div> Sat Sept 5 — Arrive + LSU Game</div>
       <div class="legend-item"><div class="legend-dot c2"></div> Sun Sept 6 — Church + BR Afternoon</div>
       <div class="legend-item"><div class="legend-dot c3"></div> Mon Sept 7 — Atchafalaya Basin</div>
-      <div class="legend-item"><div class="legend-dot c4"></div> Tue Sept 8 — Grand Isle + Gulf</div>
+      <div class="legend-item"><div class="legend-dot c4"></div> Tue Sept 8 — Jackson, MS</div>
       <div class="legend-item"><div class="legend-dot c5"></div> Wed Sept 9 — New Orleans</div>
     </div>
 
@@ -168,14 +168,15 @@
       </div>
     </div>
 
-    <div class="day-card" onclick="flyTo(29.2380, -89.9567, 10)">
-      <div class="day-header"><div class="day-dot c4"></div>TUE SEPT 8 — GRAND ISLE</div>
+    <div class="day-card" onclick="flyTo(32.3038, -90.1796, 13)">
+      <div class="day-header"><div class="day-dot c4"></div>TUE SEPT 8 — JACKSON, MS</div>
       <div class="day-body">
-        <div class="stop"><div class="stop-num">1</div><div>Drive south on Hwy 1 — marsh drive</div></div>
-        <div class="stop"><div class="stop-num">2</div><div>Isle de Jean Charles — sinking island detour</div></div>
-        <div class="stop"><div class="stop-num">3</div><div>🌊 Grand Isle — kayak fishing, beach, state park</div></div>
-        <div class="stop"><div class="stop-num">4</div><div>🥖 Starfish po'boys on LA-1</div></div>
-        <div class="stop"><div class="stop-num">5</div><div>Drive to New Orleans, Frenchmen Street night</div></div>
+        <div class="stop"><div class="stop-num">1</div><div>✊ Mississippi Civil Rights Museum</div></div>
+        <div class="stop"><div class="stop-num">2</div><div>Museum of Mississippi History (same complex)</div></div>
+        <div class="stop"><div class="stop-num">3</div><div>🏠 Medgar Evers Home & Museum</div></div>
+        <div class="stop"><div class="stop-num">4</div><div>🐷 Big Apple Inn — Farish St (pig ear sandwiches since 1939)</div></div>
+        <div class="stop"><div class="stop-num">5</div><div>🎸 Fondren District — arts + afternoon chill</div></div>
+        <div class="stop"><div class="stop-num">6</div><div>Drive to New Orleans via I-55, Frenchmen Street night</div></div>
       </div>
     </div>
 
@@ -241,10 +242,11 @@ const stops = [
   { lat: 30.2890, lng: -91.9040, color: '#2a9d8f', label: '🥩', day: 'Mon Sept 7', name: 'Poche\'s Market — Breaux Bridge', desc: 'Cash-only Cajun butcher. Boudin, cracklins, stuffed mirliton. Non-negotiable stop.' },
   { lat: 30.3120, lng: -91.7950, color: '#2a9d8f', label: '🍤', day: 'Mon Sept 7', name: "Robin's Restaurant — Henderson", desc: "Unpretentious Cajun food that locals actually eat. Crawfish étouffée is legendary. No tourists, all flavor." },
 
-  // Day 4 - Blue
-  { lat: 29.3447, lng: -90.5764, color: '#457b9d', label: '👁', day: 'Tue Sept 8', name: 'Isle de Jean Charles', desc: "Louisiana's famous sinking island — climate refugees' ancestral home. A ghost of a place. Sobering and unlike anywhere else." },
-  { lat: 29.2380, lng: -89.9567, color: '#457b9d', label: '🌊', day: 'Tue Sept 8', name: 'Grand Isle', desc: "Louisiana's only inhabited barrier island. Kayak fishing for redfish, Grand Isle State Park beach, observation tower. September = prime fishing season." },
-  { lat: 29.2410, lng: -89.9600, color: '#457b9d', label: '🥖', day: 'Tue Sept 8', name: 'Starfish Restaurant — Grand Isle', desc: 'Overstuffed po\'boys on LA-1. Locals eat here. Grab one before the drive back north.' },
+  // Day 4 - Blue (Jackson, MS)
+  { lat: 32.3038, lng: -90.1796, color: '#457b9d', label: '✊', day: 'Tue Sept 8', name: 'Mississippi Civil Rights Museum', desc: 'One of the best civil rights museums in the country. Eight galleries, unflinching honesty. "This Little Light of Mine" gallery alone is worth the stop. Budget 2+ hours.' },
+  { lat: 32.3224, lng: -90.1702, color: '#457b9d', label: '🏠', day: 'Tue Sept 8', name: 'Medgar Evers Home & Museum', desc: 'The actual house where NAACP field secretary Medgar Evers was assassinated in 1963. Original bullet hole in the kitchen wall. Small, powerful, deeply moving. Call ahead.' },
+  { lat: 32.3076, lng: -90.1928, color: '#457b9d', label: '🐷', day: 'Tue Sept 8', name: 'Big Apple Inn — Farish Street', desc: 'Operating since 1939 on the historic Farish Street. Pig ear sandwiches and smoked sausage for ~$2. A Jackson institution, not a tourist gimmick.' },
+  { lat: 32.2876, lng: -90.1562, color: '#457b9d', label: '🎸', day: 'Tue Sept 8', name: 'Fondren District', desc: "Jackson's arts-and-indie neighborhood. Independent galleries, vintage shops, coffee, a few good bars. Walker's Drive-In is here if you want a proper burger. Leave by 4pm for NOLA." },
 
   // Day 5 - Purple
   { lat: 29.9627, lng: -90.0566, color: '#6a4c93', label: '🎷', day: 'Wed Sept 9', name: 'Frenchmen Street — Marigny', desc: 'Where locals actually go for jazz. Walk bar to bar, live music everywhere, no cover most nights. Better than Bourbon Street in every way.' },
@@ -259,8 +261,7 @@ const routeCoords = [
   [30.2724, -91.8985],  // Breaux Bridge
   [30.3180, -91.7876],  // Henderson/Atchafalaya
   [29.9496, -91.2032],  // Pierre Part houseboat
-  [29.3447, -90.5764],  // Isle de Jean Charles
-  [29.2380, -89.9567],  // Grand Isle
+  [32.3038, -90.1796],  // Jackson, MS
   [29.9511, -90.0715],  // New Orleans
 ];
 
