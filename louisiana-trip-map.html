@@ -150,7 +150,7 @@
     <div class="day-card" onclick="flyTo(30.4490, -91.1874, 13)">
       <div class="day-header"><div class="day-dot c2"></div>SUN SEPT 6 — BATON ROUGE</div>
       <div class="day-body">
-        <div class="stop"><div class="stop-num">1</div><div>⛪ Church with Kyla — morning</div></div>
+        <div class="stop"><div class="stop-num">1</div><div>⛪ Church with Kyla — Denham Springs LDS Chapel</div></div>
         <div class="stop"><div class="stop-num">2</div><div>Old State Capitol or Rural Life Museum</div></div>
         <div class="stop"><div class="stop-num">3</div><div>🍽 Dinner: Latil's Landing, Darrow</div></div>
         <div class="stop"><div class="stop-num">4</div><div>Drive to houseboat — check in</div></div>
@@ -229,6 +229,7 @@ const stops = [
   { lat: 30.4515, lng: -91.1871, color: '#e63946', label: '1', day: 'Sat Sept 5', name: 'Baton Rouge — Home Base', desc: 'Arrive afternoon. Stay near LSU or downtown BR. Louie\'s Café for dinner before the game (open since 1941).' },
 
   // Day 2 - Orange
+  { lat: 30.4850, lng: -90.9450, color: '#f4a261', label: '⛪', day: 'Sun Sept 6', name: 'Denham Springs LDS Chapel', desc: 'Sunday morning sacrament meeting with Kyla in her mission area. The anchor of the whole trip.' },
   { lat: 30.4490, lng: -91.1874, color: '#f4a261', label: '2', day: 'Sun Sept 6', name: 'Old State Capitol', desc: 'Gothic castle on the Mississippi. Mark Twain called it a "monstrosity." Worth seeing. Quiet on a Sunday.' },
   { lat: 30.3960, lng: -91.1500, color: '#f4a261', label: '2', day: 'Sun Sept 6', name: 'LSU Rural Life Museum', desc: '25 acres of authentic 18th/19th century Louisiana plantation life. Underrated, genuinely fascinating.' },
   { lat: 29.9462, lng: -90.3537, color: '#888', label: '🏰', day: 'Thu Sept 10', name: 'Destrehan Plantation', desc: 'Morning stop before heading to MSY. One of the oldest intact plantation homes in the lower Mississippi Valley (built 1787). Massive live oaks, original outbuildings, powerful history including the 1811 German Coast Uprising. Then straight to the airport — ~30 min to MSY.' },
@@ -255,6 +256,8 @@ const stops = [
 
 const routeCoords = [
   [30.4515, -91.1871],  // Baton Rouge
+  [30.4850, -90.9450],  // Denham Springs LDS Chapel
+  [30.4515, -91.1871],  // back to BR
   [29.9496, -91.2032],  // Pierre Part houseboat
   [32.2988, -90.1848],  // Jackson, MS
   [29.9511, -90.0715],  // New Orleans
