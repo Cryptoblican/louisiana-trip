@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louisiana Trip — Brett, Jen & Kyla | Sept 5–10, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --lsu-purple: #461d7c;
+    --lsu-gold: #fdd023;
+    --day1: #e63946;
+    --day2: #e07b39;
+    --day3: #2a9d8f;
+    --day4: #457b9d;
+    --day5: #6a4c93;
+    --dark: #1a1a2e;
+    --light: #f8f5f0;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --muted: #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--lsu-purple) 0%, #2d0f5e 50%, #1a0a3e 100%);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fdd023' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  .hero-emoji { font-size: 3rem; margin-bottom: 16px; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--lsu-gold);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .tag {
+    background: rgba(253, 208, 35, 0.15);
+    border: 1px solid rgba(253, 208, 35, 0.4);
+    color: var(--lsu-gold);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* QUICK LINKS */
+  .quick-nav {
+    background: var(--lsu-purple);
+    padding: 14px 40px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+
+  .quick-nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .quick-nav a:hover { background: rgba(253,208,35,0.2); color: var(--lsu-gold); }
+
+  /* OVERVIEW */
+  .overview {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .overview-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-top: 3px solid var(--lsu-gold);
+  }
+
+  .overview-card .oc-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .overview-card .oc-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .overview-card .oc-value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+
+  /* MAP LINK */
+  .map-banner {
+    max-width: 900px;
+    margin: 0 auto 32px;
+    padding: 0 24px;
+  }
+  .map-banner a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--lsu-purple), #6a4c93);
+    color: white;
+    text-decoration: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 15px rgba(70, 29, 124, 0.3);
+  }
+  .map-banner a:hover { opacity: 0.9; }
+  .map-banner .map-icon { font-size: 1.5rem; }
+  .map-banner .map-text div:first-child { font-size: 0.95rem; font-weight: 600; }
+  .map-banner .map-text div:last-child { font-size: 0.78rem; opacity: 0.8; margin-top: 2px; }
+  .map-banner .map-arrow { margin-left: auto; font-size: 1.2rem; }
+
+  /* MAIN CONTENT */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+
+  /* DAY SECTIONS */
+  .day-section {
+    margin-bottom: 48px;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid currentColor;
+  }
+
+  .day-badge {
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  .day-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* STOP CARDS */
+  .stops-grid {
+    display: grid;
+    gap: 14px;
+  }
+
+  .stop-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-left: 4px solid;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .stop-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+
+  .stop-emoji { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+
+  .stop-content { flex: 1; }
+  .stop-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+  .stop-location { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+  .stop-desc { font-size: 0.85rem; color: #444; line-height: 1.5; }
+
+  .stop-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* STAY CARD */
+  .stay-card {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-top: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  }
+  .stay-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .stay-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--lsu-gold); font-weight: 600; margin-bottom: 3px; }
+  .stay-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+  .stay-desc { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+  .stay-link { display: inline-block; margin-top: 8px; font-size: 0.78rem; color: var(--lsu-gold); text-decoration: none; }
+  .stay-link:hover { text-decoration: underline; }
+
+  /* PRO TIPS */
+  .tip-box {
+    background: #fffbeb;
+    border: 1px solid #fdd023;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 0.83rem;
+    color: #5a4800;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tip-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* LOGISTICS */
+  .logistics {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    margin-bottom: 32px;
+  }
+  .logistics h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--lsu-purple);
+  }
+  .logistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .logistics-item { font-size: 0.85rem; }
+  .logistics-item strong { display: block; color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px; }
+
+  /* AIRBNB SECTION */
+  .airbnb-section {
+    background: linear-gradient(135deg, #ff5a5f, #e63946);
+    color: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+  .airbnb-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .airbnb-options { display: grid; gap: 12px; }
+  .airbnb-option {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .airbnb-option .ao-name { font-weight: 600; margin-bottom: 4px; }
+  .airbnb-option .ao-desc { font-size: 0.82rem; opacity: 0.9; margin-bottom: 8px; }
+  .airbnb-option a { font-size: 0.78rem; color: #ffe; text-decoration: none; display: inline-block; padding: 4px 10px; background: rgba(255,255,255,0.2); border-radius: 4px; }
+  .airbnb-option a:hover { background: rgba(255,255,255,0.3); }
+
+  /* WEATHER NOTE */
+  .weather-note {
+    background: #e8f4fd;
+    border-left: 4px solid #457b9d;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    font-size: 0.85rem;
+    color: #1a4a6e;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 10px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--lsu-purple);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.8rem;
+  }
+  footer strong { color: var(--lsu-gold); }
+
+  /* Day colors */
+  .d1 { color: var(--day1); border-color: var(--day1); }
+  .d2 { color: var(--day2); border-color: var(--day2); }
+  .d3 { color: var(--day3); border-color: var(--day3); }
+  .d4 { color: var(--day4); border-color: var(--day4); }
+  .d5 { color: var(--day5); border-color: var(--day5); }
+
+  .bg-d1 { background: var(--day1); }
+  .bg-d2 { background: var(--day2); }
+  .bg-d3 { background: var(--day3); }
+  .bg-d4 { background: var(--day4); }
+  .bg-d5 { background: var(--day5); }
+
+  .border-d1 { border-left-color: var(--day1); }
+  .border-d2 { border-left-color: var(--day2); }
+  .border-d3 { border-left-color: var(--day3); }
+  .border-d4 { border-left-color: var(--day4); }
+  .border-d5 { border-left-color: var(--day5); }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.9rem; }
+    .day-title { font-size: 1.3rem; }
+    .quick-nav { padding: 10px 16px; }
+  }
+
+  @media print {
+    .quick-nav { display: none; }
+    .stop-card:hover { transform: none; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-emoji">🦞</div>
+  <h1>Louisiana Road Trip</h1>
+  <h2>Brett, Jen & Kyla &nbsp;·&nbsp; September 5–10, 2026</h2>
+  <div class="hero-tags">
+    <span class="tag">🏈 LSU vs Clemson</span>
+    <span class="tag">⛪ Mission Visit</span>
+    <span class="tag">🐊 Atchafalaya Basin</span>
+    <span class="tag">🎸 Jackson, MS</span>
+    <span class="tag">🎷 New Orleans</span>
+    <span class="tag">🏠 Bayou Houseboat</span>
+  </div>
+</div>
+
+<!-- QUICK NAV -->
+<nav class="quick-nav">
+  <a href="#day1">Sat · Baton Rouge</a>
+  <a href="#day2">Sun · BR + Breaux Bridge</a>
+  <a href="#day3">Mon · Atchafalaya</a>
+  <a href="#day4">Tue · Jackson, MS</a>
+  <a href="#day5">Wed · New Orleans</a>
+  <a href="#logistics">Logistics</a>
+</nav>
+
+<!-- OVERVIEW CARDS -->
+<div class="overview">
+  <div class="overview-card">
+    <div class="oc-icon">📅</div>
+    <div class="oc-label">Duration</div>
+    <div class="oc-value">5 days / 4 nights</div>
+  </div>
+  <div class="overview-card">
+    <div class="oc-icon">👨‍👩‍👧</div>
+    <div class="oc-label">Travelers</div>
+    <div class="oc-value">Brett, Jen & Kyla</div>
+  </div>
+  <div class="overview-card">
+    <div class="oc-icon">✈️</div>
+    <div class="oc-label">Fly In / Out</div>
+    <div class="oc-value">BTR → MSY to SLC</div>
+  </div>
+  <div class="overview-card">
+    <div class="oc-icon">🗺</div>
+    <div class="oc-label">Route</div>
+    <div class="oc-value">~550 miles total</div>
+  </div>
+  <div class="overview-card">
+    <div class="oc-icon">🌡</div>
+    <div class="oc-label">Weather</div>
+    <div class="oc-value">90°F+ · humid · hurricane season</div>
+  </div>
+</div>
+
+<!-- MAP LINK BANNER -->
+<div class="map-banner">
+  <a href="https://cryptoblican.github.io/louisiana-trip/" target="_blank">
+    <span class="map-icon">🗺</span>
+    <div class="map-text">
+      <div>View Interactive Map</div>
+      <div>All stops plotted with clickable details · color-coded by day</div>
+    </div>
+    <span class="map-arrow">→</span>
+  </a>
+</div>
+
+<!-- WEATHER NOTE -->
+<div class="content">
+<div class="weather-note">
+  <span>🌀</span>
+  <div><strong>September heads-up:</strong> Louisiana and Mississippi in September are hot (90°+) and very humid. Pack light, breathable clothes. The entire route is inland so no hurricane weather windows to worry about. Jackson, MS can get afternoon thunderstorms — plan indoor stops mid-day if needed.</div>
+</div>
+
+<!-- ==================== DAY 1 ==================== -->
+<div class="day-section" id="day1">
+  <div class="day-header d1">
+    <span class="day-badge bg-d1">Saturday · Sept 5</span>
+    <div>
+      <div class="day-title">Baton Rouge — Arrive & Game Day</div>
+      <div class="day-subtitle">Fly in, get settled, experience one of the great atmospheres in sports</div>
+    </div>
+  </div>
+
+  <div class="stops-grid">
+    <div class="stop-card border-d1">
+      <span class="stop-emoji">✈️</span>
+      <div class="stop-content">
+        <div class="stop-name">Arrive Baton Rouge (BTR) — Afternoon</div>
+        <div class="stop-location">📍 Baton Rouge, LA</div>
+        <div class="stop-desc">Check in near LSU or downtown BR. Give yourself time to get oriented before the game. The campus area has plenty of walking distance options.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d1">
+      <span class="stop-emoji">🍳</span>
+      <div class="stop-content">
+        <div class="stop-name">Louie's Café — Pre-Game Dinner</div>
+        <div class="stop-location">📍 3322 Lake St, Baton Rouge · Near LSU</div>
+        <div class="stop-desc">Open since 1941. Cash only, diner vibes, local institution. The kind of place that's been feeding LSU students and families for generations. Go early before the crowds build.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d1">
+      <span class="stop-emoji">🏈</span>
+      <div class="stop-content">
+        <div class="stop-name">LSU vs. Clemson — Tiger Stadium</div>
+        <div class="stop-location">📍 Tiger Stadium, LSU Campus, Baton Rouge · Night Game</div>
+        <div class="stop-desc">102,000 fans. Death Valley at night. Purple and gold everywhere. LSU night games are legitimately one of the loudest, most electric atmospheres in college football — Sports Illustrated has called it the greatest in the sport. Soak every second. <strong>Tickets already purchased.</strong></div>
+        <div style="margin-top:8px">
+          <span class="stop-tag" style="background:#e63946;color:white;">🎟 Tickets Confirmed</span>
+          <span class="stop-tag" style="background:#461d7c;color:#fdd023;">Night Game</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay-card">
+    <span class="stay-icon">🏨</span>
+    <div>
+      <div class="stay-label">Tonight's Stay</div>
+      <div class="stay-name">Baton Rouge Hotel — Near LSU</div>
+      <div class="stay-desc">Book near campus or downtown. Post-game traffic around Tiger Stadium can be intense — walkable is better than driving if possible.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DAY 2 ==================== -->
+<div class="day-section" id="day2">
+  <div class="day-header d2">
+    <span class="day-badge bg-d2">Sunday · Sept 6</span>
+    <div>
+      <div class="day-title">Church with Kyla + BR Sights</div>
+      <div class="day-subtitle">Morning worship, afternoon exploration, then head west to Bayou Country</div>
+    </div>
+  </div>
+
+  <div class="stops-grid">
+    <div class="stop-card border-d2">
+      <span class="stop-emoji">⛪</span>
+      <div class="stop-content">
+        <div class="stop-name">Church with Kyla — Morning</div>
+        <div class="stop-location">📍 Baton Rouge Mission Area</div>
+        <div class="stop-desc">The anchor of the trip. Attend sacrament meeting with Kyla in her mission area. <strong>Note:</strong> Confirm with her mission president what family time is allowed beyond church — most missions allow family visits on P-day (often Mondays). This could open up Monday as a Kyla day if approved.</div>
+        <div style="margin-top:8px"><span class="stop-tag" style="background:#e07b39;color:white;">❤️ Priority Stop</span></div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d2">
+      <span class="stop-emoji">🏛</span>
+      <div class="stop-content">
+        <div class="stop-name">Destrehan Plantation</div>
+        <div class="stop-location">📍 13034 River Rd, Destrehan, LA · ~35 min from BR, on the way toward Breaux Bridge</div>
+        <div class="stop-desc">One of the oldest intact plantation homes in the lower Mississippi Valley, built in 1787. Sits on the River Road between Baton Rouge and New Orleans with massive live oaks and original outbuildings. Tours cover the full history including the 1811 German Coast Uprising — one of the largest slave rebellions in U.S. history, which ended on these grounds. Beautiful and sobering in equal measure. September afternoons are quiet. <strong>Combine it with the drive toward Breaux Bridge — it's right on the route.</strong></div>
+        <div style="margin-top:8px"><span class="stop-tag" style="background:#e07b39;color:white;">✅ Confirmed Plan</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;margin-bottom:8px;font-size:0.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Optional — Decide Closer to the Trip</div>
+  <div class="stops-grid">
+    <div class="stop-card border-d2" style="opacity:0.7;">
+      <span class="stop-emoji">🏰</span>
+      <div class="stop-content">
+        <div class="stop-name">Old State Capitol <span class="stop-tag" style="background:#ccc;color:#555;">Optional</span></div>
+        <div class="stop-location">📍 100 North Blvd, Baton Rouge</div>
+        <div class="stop-desc">Gothic castle on the Mississippi River. Mark Twain called it a "monstrosity." Restored museum of Louisiana political history. Genuinely strange and beautiful — good add if you have time before Destrehan.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d2" style="opacity:0.7;">
+      <span class="stop-emoji">🌾</span>
+      <div class="stop-content">
+        <div class="stop-name">LSU Rural Life Museum <span class="stop-tag" style="background:#ccc;color:#555;">Optional</span></div>
+        <div class="stop-location">📍 4560 Essen Ln, Baton Rouge</div>
+        <div class="stop-desc">25 acres of authentic 18th/19th century Louisiana plantation life — working farm, slave quarters, sugar mill. Quiet and underrated. Could replace or precede Destrehan if you want more history depth.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d2" style="opacity:0.7;">
+      <span class="stop-emoji">🍽</span>
+      <div class="stop-content">
+        <div class="stop-name">Latil's Landing — Sunday Dinner <span class="stop-tag" style="background:#ccc;color:#555;">Optional</span></div>
+        <div class="stop-location">📍 River Road, Darrow, LA · ~30 min from BR</div>
+        <div class="stop-desc">Historic plantation restaurant on the River Road. James Beard-caliber Creole cuisine in a jaw-dropping setting on the Mississippi. This is a splurge — worth it if budget allows and you want a special dinner before hitting the bayou. <strong>Reservation required if you go.</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay-card">
+    <span class="stay-icon">🏠</span>
+    <div>
+      <div class="stay-label">Tonight's Stay</div>
+      <div class="stay-name">Drive to Breaux Bridge → Check into Houseboat</div>
+      <div class="stay-desc">~1 hour west of Baton Rouge. Get checked in Sunday night so you wake up on the bayou Monday morning. First morning sunrise from the deck is the goal.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DAY 3 ==================== -->
+<div class="day-section" id="day3">
+  <div class="day-header d3">
+    <span class="day-badge bg-d3">Monday · Sept 7 (Labor Day)</span>
+    <div>
+      <div class="day-title">Atchafalaya Basin — Deep Bayou</div>
+      <div class="day-subtitle">The largest swamp in America. Cypress trees, gators, Spanish moss, total immersion.</div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-icon">💡</span>
+    <div><strong>Labor Day note:</strong> Most bayou tour operators run on Labor Day — it's actually a popular weekend for locals. Poche's Market may have limited hours. Call ahead to confirm. Everything else should be normal.</div>
+  </div>
+  <br>
+
+  <div class="stops-grid">
+    <div class="stop-card border-d3">
+      <span class="stop-emoji">☀️</span>
+      <div class="stop-content">
+        <div class="stop-name">Sunrise on the Houseboat Deck</div>
+        <div class="stop-location">📍 Atchafalaya Basin, Morgan City / Pierre Part area</div>
+        <div class="stop-desc">Set your alarm. The bayou at sunrise — mist rising off the water, birds starting up, total silence — is one of those moments. Don't sleep through it.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d3">
+      <span class="stop-emoji">🐊</span>
+      <div class="stop-content">
+        <div class="stop-name">Atchafalaya Basin Boat Tour — McGee's Lodge</div>
+        <div class="stop-location">📍 Henderson, LA · ~30 min from Breaux Bridge</div>
+        <div class="stop-desc">The largest river swamp in the United States — 1.4 million acres. McGee's runs small-group tours through ancient cypress forests draped in Spanish moss. You'll see alligators, herons, egrets, roseate spoonbills. Go in the morning when wildlife is most active. <strong>Book ahead — Labor Day fills up.</strong></div>
+        <div style="margin-top:8px"><span class="stop-tag" style="background:#2a9d8f;color:white;">📞 Book in Advance</span></div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d3">
+      <span class="stop-emoji">🥩</span>
+      <div class="stop-content">
+        <div class="stop-name">Poche's Market & Restaurant</div>
+        <div class="stop-location">📍 3015 Main Hwy, Breaux Bridge, LA</div>
+        <div class="stop-desc">Cash-only Cajun butcher and deli. This is not a tourist place — it's where locals have been getting their boudin, cracklins, smoked sausage, and stuffed mirliton for decades. The boudin alone is worth the trip to Breaux Bridge. Get extra.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d3">
+      <span class="stop-emoji">🚣</span>
+      <div class="stop-content">
+        <div class="stop-name">Kayak the Bayou Teche Corridor</div>
+        <div class="stop-location">📍 Bayou Teche, Breaux Bridge area</div>
+        <div class="stop-desc">Bayou Teche winds through Cajun country for 125 miles. Kayak rentals available in the area. Go at your own pace through cypress-lined waterways, past old fishing camps and boat shacks. The afternoon light on the water is incredible.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d3">
+      <span class="stop-emoji">🍤</span>
+      <div class="stop-content">
+        <div class="stop-name">Robin's Restaurant — Dinner</div>
+        <div class="stop-location">📍 Henderson, LA</div>
+        <div class="stop-desc">No pretense, no tourists — just the crawfish étouffée that locals drive an hour for. Unpretentious Cajun cooking at its finest. Order the étouffée, the fried catfish, or whatever the special is. You won't leave disappointed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay-card">
+    <span class="stay-icon">🛶</span>
+    <div>
+      <div class="stay-label">Tonight's Stay — Night 2 on the Houseboat</div>
+      <div class="stay-name">Bayou Houseboat — Atchafalaya Basin</div>
+      <div class="stay-desc">Fall asleep to the sounds of the swamp. This is the centerpiece stay of the whole trip.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DAY 4 ==================== -->
+<div class="day-section" id="day4">
+  <div class="day-header d4">
+    <span class="day-badge bg-d4">Tuesday · Sept 8</span>
+    <div>
+      <div class="day-title">Jackson, Mississippi</div>
+      <div class="day-subtitle">~2.5 hrs north of the bayou. Civil rights history, great food, and a city that doesn't care if you're a tourist.</div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-icon">🗺</span>
+    <div><strong>Routing note:</strong> Henderson/Breaux Bridge → Jackson, MS is ~2.5 hrs. Jackson → New Orleans is ~3 hrs via I-55. Plan to leave the bayou by 9am, give yourself 5-6 hrs in Jackson, and roll into NOLA by evening. Efficient and zero backtracking.</div>
+  </div>
+  <br>
+
+  <div class="stops-grid">
+    <div class="stop-card border-d4">
+      <span class="stop-emoji">✊</span>
+      <div class="stop-content">
+        <div class="stop-name">Mississippi Civil Rights Museum</div>
+        <div class="stop-location">📍 222 North St, Jackson, MS · Downtown</div>
+        <div class="stop-desc">One of the best civil rights museums in the country — opened 2017, it's raw and honest in a way a lot of history museums aren't. Eight galleries tracing Mississippi's role in the movement: from slavery through Freedom Summer to the present. Budget at least 2 hours. The "This Little Light of Mine" gallery alone is worth the stop.</div>
+        <div style="margin-top:8px"><span class="stop-tag" style="background:#457b9d;color:white;">❤️ Don't Rush This One</span></div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d4">
+      <span class="stop-emoji">🏛</span>
+      <div class="stop-content">
+        <div class="stop-name">Museum of Mississippi History</div>
+        <div class="stop-location">📍 222 North St, Jackson, MS · Connects directly to Civil Rights Museum</div>
+        <div class="stop-desc">Right next door, one ticket covers both. Covers 15,000 years of Mississippi history — Indigenous cultures, early European settlement, the Civil War, the Delta blues, and more. If you're short on time, the Civil Rights Museum is the priority — but if you're moving well, duck in for the highlights.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d4">
+      <span class="stop-emoji">🏠</span>
+      <div class="stop-content">
+        <div class="stop-name">Medgar Evers Home & Museum</div>
+        <div class="stop-location">📍 2332 Margaret Walker Alexander Dr, Jackson, MS</div>
+        <div class="stop-desc">The actual house where NAACP field secretary Medgar Evers was assassinated in his driveway in 1963. Still has the original bullet hole in the kitchen wall. Small, powerful, and deeply moving — maintained by Tougaloo College. Call ahead to confirm hours. Not far from downtown.</div>
+        <div style="margin-top:8px"><span class="stop-tag" style="background:#457b9d;color:white;">📞 Call Ahead</span></div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d4">
+      <span class="stop-emoji">🐷</span>
+      <div class="stop-content">
+        <div class="stop-name">Big Apple Inn — Lunch</div>
+        <div class="stop-location">📍 509 N Farish St, Jackson, MS · Farish Street Historic District</div>
+        <div class="stop-desc">Operating since 1939 on Farish Street — the historic heart of Black Jackson. They serve pig ear sandwiches and smoked sausage on a bun for about $2. This is not a tourist gimmick; this is a Jackson institution. Get two of each. The Farish Street District itself has a complex, resilient history — worth a short walk around the block.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d4">
+      <span class="stop-emoji">🎸</span>
+      <div class="stop-content">
+        <div class="stop-name">Fondren District — Afternoon Browse</div>
+        <div class="stop-location">📍 Fondren, Jackson, MS · N State St area</div>
+        <div class="stop-desc">Jackson's arts-and-indie neighborhood. Independent galleries, vintage shops, coffee, a few good bars. Laid-back and walkable. Good spot to decompress after a heavy museum morning before the drive south. Walker's Drive-In is here if you want a proper burger instead of pig ears.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d4">
+      <span class="stop-emoji">🎷</span>
+      <div class="stop-content">
+        <div class="stop-name">Drive to New Orleans — Frenchmen Street Night</div>
+        <div class="stop-location">📍 Frenchmen Street, Marigny, New Orleans · ~3 hrs from Jackson via I-55</div>
+        <div class="stop-desc">Leave Fondren by 4pm and you'll roll into NOLA right at golden hour. Drop bags, go straight to Frenchmen Street in the Marigny. Walk bar to bar — Spotted Cat, d.b.a., Maison. Live jazz at every door, no cover most nights. This is where locals go. Not Bourbon Street.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay-card">
+    <span class="stay-icon">🏨</span>
+    <div>
+      <div class="stay-label">Tonight's Stay</div>
+      <div class="stay-name">New Orleans — Marigny or Bywater Neighborhood</div>
+      <div class="stay-desc">Stay in the Marigny (steps from Frenchmen Street) or Bywater for the real New Orleans vibe. French Quarter works if you want maximum convenience, but it's louder and pricier.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DAY 5 ==================== -->
+<div class="day-section" id="day5">
+  <div class="day-header d5">
+    <span class="day-badge bg-d5">Wednesday · Sept 9</span>
+    <div>
+      <div class="day-title">New Orleans — The Real Version</div>
+      <div class="day-subtitle">Tremé, jazz, legendary food, the Garden District. Skip the tourist traps.</div>
+    </div>
+  </div>
+
+  <div class="stops-grid">
+    <div class="stop-card border-d5">
+      <span class="stop-emoji">☕</span>
+      <div class="stop-content">
+        <div class="stop-name">Congregation Coffee — Morning</div>
+        <div class="stop-location">📍 3109 Magazine St or Marigny location, New Orleans</div>
+        <div class="stop-desc">Better coffee than Café Du Monde, infinitely less crowded. Local roaster. Start the day right before diving into the city.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d5">
+      <span class="stop-emoji">🏘</span>
+      <div class="stop-content">
+        <div class="stop-name">Tremé Neighborhood Walk</div>
+        <div class="stop-location">📍 Tremé, New Orleans</div>
+        <div class="stop-desc">The oldest African American neighborhood in the United States. The actual birthplace of jazz — not Bourbon Street. Walk it, feel the architecture, find the second-line culture. More authentic than anywhere in the French Quarter.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d5">
+      <span class="stop-emoji">⚰️</span>
+      <div class="stop-content">
+        <div class="stop-name">St. Louis Cemetery #1</div>
+        <div class="stop-location">📍 400 Basin St, New Orleans</div>
+        <div class="stop-desc">Above-ground tombs, Napoleon's would-be resting place, voodoo history, genuinely eerie atmosphere. Guided tour now required to enter (Save Our Cemeteries runs them — book ahead). One of the most unique spots in America.</div>
+        <div style="margin-top:8px"><span class="stop-tag" style="background:#6a4c93;color:white;">📞 Guided Tour Required</span></div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d5">
+      <span class="stop-emoji">🍗</span>
+      <div class="stop-content">
+        <div class="stop-name">Dooky Chase's Restaurant — Lunch</div>
+        <div class="stop-location">📍 2301 Orleans Ave, Tremé, New Orleans</div>
+        <div class="stop-desc">Legendary institution. Leah Chase fed Martin Luther King Jr., Ray Charles, and Barack Obama at this table. The fried chicken is a pilgrimage item. The gumbo z'herbes is unlike anything you've had. This is not just a meal — it's a piece of American history.</div>
+        <div style="margin-top:8px"><span class="stop-tag" style="background:#6a4c93;color:white;">❤️ Do Not Miss</span></div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d5">
+      <span class="stop-emoji">🏡</span>
+      <div class="stop-content">
+        <div class="stop-name">Garden District Stroll</div>
+        <div class="stop-location">📍 Garden District, New Orleans</div>
+        <div class="stop-desc">Antebellum mansions, live oaks, Magazine Street shops. Commander's Palace is here — if you want to splurge on a late lunch or afternoon cocktail, the bar at Commander's is worth it. The bread pudding soufflé is absurd.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d5">
+      <span class="stop-emoji">🍷</span>
+      <div class="stop-content">
+        <div class="stop-name">Bacchanal Wine — Evening</div>
+        <div class="stop-location">📍 600 Poland Ave, Bywater, New Orleans</div>
+        <div class="stop-desc">Outdoor wine bar with live music in the courtyard. Grab a bottle from the shop inside, take it to the backyard, and listen to whatever trio is playing. Jen will love this. It's the perfect last-night vibe — relaxed, local, beautiful.</div>
+      </div>
+    </div>
+
+    <div class="stop-card border-d5">
+      <span class="stop-emoji">🎷</span>
+      <div class="stop-content">
+        <div class="stop-name">Frenchmen Street — Late Night</div>
+        <div class="stop-location">📍 Frenchmen St, Marigny, New Orleans</div>
+        <div class="stop-desc">The Spotted Cat, d.b.a., Maison — walk between them, tip the musicians, stay as long as you want. This is what NOLA is actually about. Last night energy.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay-card">
+    <span class="stay-icon">🏨</span>
+    <div>
+      <div class="stay-label">Tonight's Stay — Last Night</div>
+      <div class="stay-name">New Orleans (same hotel)</div>
+      <div class="stay-desc">Early-ish night if flying Thursday — MSY is 30+ min from the Quarter, and morning traffic can add time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FLY HOME ==================== -->
+<div class="day-section">
+  <div class="day-header" style="color:#888;border-color:#ccc;">
+    <span class="day-badge" style="background:#888;">Thursday · Sept 10</span>
+    <div>
+      <div class="day-title" style="color:#555;">Fly Home — New Orleans → SLC</div>
+      <div class="day-subtitle">Louis Armstrong International (MSY) → Salt Lake City (SLC)</div>
+    </div>
+  </div>
+
+  <div class="stops-grid">
+    <div class="stop-card" style="border-left-color:#888;">
+      <span class="stop-emoji">🍩</span>
+      <div class="stop-content">
+        <div class="stop-name">Café Du Monde — Morning Beignets</div>
+        <div class="stop-location">📍 800 Decatur St, French Quarter</div>
+        <div class="stop-desc">You basically have to. Café au lait and three beignets. Powdered sugar everywhere. Classic. Then grab your bags and head to MSY.</div>
+      </div>
+    </div>
+    <div class="stop-card" style="border-left-color:#888;">
+      <span class="stop-emoji">✈️</span>
+      <div class="stop-content">
+        <div class="stop-name">Louis Armstrong Airport (MSY)</div>
+        <div class="stop-location">📍 1 Terminal Dr, Kenner, LA · ~30 min from French Quarter</div>
+        <div class="stop-desc">Give yourself 90 minutes from your hotel to the gate. Traffic on I-10 can surprise you. MSY is a solid airport once you're there — easy security, good food options post-TSA.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== AIRBNBS ==================== -->
+<div class="airbnb-section" id="logistics">
+  <h3>🏠 Bayou Houseboat Options — Book ASAP</h3>
+  <div class="airbnb-options">
+    <div class="airbnb-option">
+      <div class="ao-name">⭐ Bayou Houseboat Oasis — Morgan City, Atchafalaya Basin</div>
+      <div class="ao-desc">Rustic houseboat on the water. Fish and kayak off the deck. Rated for adventurous travelers wanting authentic Louisiana bayou culture. Located in the largest wetland and swamp in the US. This is the top pick.</div>
+      <a href="https://www.airbnb.com/rooms/856394892006124528" target="_blank">View on Airbnb →</a>
+    </div>
+    <div class="airbnb-option">
+      <div class="ao-name">Swamp Tuna Houseboat — Pierre Part, LA (VRBO)</div>
+      <div class="ao-desc">"Life unplugged" — sleep on the water, kayak from the dock, back to nature. Closer to Atchafalaya tour operators in Henderson. Good backup if Morgan City books out.</div>
+      <a href="https://www.vrbo.com/1144844" target="_blank">View on VRBO →</a>
+    </div>
+    <div class="airbnb-option">
+      <div class="ao-name">Bayou Teche Airbnb Rentals (4.9★)</div>
+      <div class="ao-desc">Multiple options along Bayou Teche near Breaux Bridge. If the houseboats are booked, this area has highly-rated waterfront rentals with the same bayou feel.</div>
+      <a href="https://www.airbnb.com/bayou-teche-la/stays" target="_blank">Browse Bayou Teche →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LOGISTICS ==================== -->
+<div class="logistics">
+  <h3>📋 Logistics at a Glance</h3>
+  <div class="logistics-grid">
+    <div class="logistics-item"><strong>Fly In</strong>Baton Rouge Metropolitan (BTR) — Saturday Sept 5 afternoon</div>
+    <div class="logistics-item"><strong>Fly Out</strong>Louis Armstrong / New Orleans (MSY) — Thursday Sept 10</div>
+    <div class="logistics-item"><strong>Car Rental</strong>Pick up at BTR, drop at MSY (one-way). Budget for ~400 miles total driving.</div>
+    <div class="logistics-item"><strong>Route</strong>BR → Breaux Bridge → Henderson → Jackson, MS → New Orleans. No backtracking.</div>
+    <div class="logistics-item"><strong>Labor Day (Sept 7)</strong>Most tour operators open. Poche's Market — call ahead. Civil Rights Museum in Jackson is open on Labor Day.</div>
+    <div class="logistics-item"><strong>Jackson Drive Day</strong>Leave bayou by 9am. ~2.5 hrs to Jackson, 5-6 hrs there, ~3 hrs to NOLA via I-55. Leave Fondren by 4pm.</div>
+    <div class="logistics-item"><strong>Kyla / Mission Rules</strong>Confirm with mission president what family time is allowed beyond Sunday church. P-day (often Monday) may allow extended visits.</div>
+    <div class="logistics-item"><strong>Reservations Needed</strong>Destrehan Plantation tour, Cemetery tour (Save Our Cemeteries), Atchafalaya boat tour, houseboat Airbnb. Call Medgar Evers Home ahead. Latil's Landing if you decide to go — reservation required.</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<footer>
+  <strong>🦞 Louisiana Trip — Brett, Jen & Kyla · Sept 5–10, 2026</strong><br>
+  <span style="margin-top:6px;display:block;">Planned with Cornwallis · Interactive map: <a href="https://cryptoblican.github.io/louisiana-trip/" target="_blank" style="color:var(--lsu-gold);">open map →</a></span>
+</footer>
+
+</body>
+</html>

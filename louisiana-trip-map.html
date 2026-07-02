@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louisiana Trip — Sept 5–10</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; font-family: 'Georgia', serif; background: #1a1a2e; color: #eee; }
+
+  #header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, #461d7c, #fdd023);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 46px;
+  }
+  #header h1 { font-size: 1.1rem; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+  #header span { font-size: 0.8rem; color: rgba(255,255,255,0.85); }
+
+  #layout {
+    position: fixed;
+    top: 46px; left: 0; right: 0; bottom: 0;
+    display: flex;
+  }
+
+  #sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: #16213e;
+    overflow-y: auto;
+    padding: 12px;
+    border-right: 1px solid #0f3460;
+    height: 100%;
+  }
+
+  .day-card {
+    background: #0f3460;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .day-card:hover { transform: translateX(3px); }
+
+  .day-header {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .day-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .day-body {
+    padding: 6px 12px 10px;
+    font-size: 0.75rem;
+    color: #aac;
+    line-height: 1.6;
+  }
+
+  .stop {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+    align-items: flex-start;
+  }
+  .stop-num {
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    width: 16px; height: 16px;
+    font-size: 0.65rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #fff;
+  }
+
+  #map { flex: 1; height: 100%; min-height: 0; }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    font-family: Georgia, serif;
+  }
+  .popup-title { font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; }
+  .popup-day { font-size: 0.75rem; color: #666; margin-bottom: 4px; }
+  .popup-desc { font-size: 0.8rem; color: #333; line-height: 1.5; }
+
+  /* Day colors */
+  .c1 { background: #e63946; }
+  .c2 { background: #f4a261; }
+  .c3 { background: #2a9d8f; }
+  .c4 { background: #457b9d; }
+  .c5 { background: #6a4c93; }
+
+  .legend {
+    background: #0f3460;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    font-size: 0.72rem;
+    color: #aac;
+  }
+  .legend-title { color: #fdd023; font-weight: bold; margin-bottom: 6px; font-size: 0.8rem; }
+  .legend-item { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>🦞 Louisiana — Brett, Jen & Kyla | Sept 5–10, 2026</h1>
+  <span>Click markers for details</span>
+</div>
+
+<div id="layout">
+  <div id="sidebar">
+    <div class="legend">
+      <div class="legend-title">🗓 Trip Days</div>
+      <div class="legend-item"><div class="legend-dot c1"></div> Sat Sept 5 — Arrive + LSU Game</div>
+      <div class="legend-item"><div class="legend-dot c2"></div> Sun Sept 6 — Church + BR Afternoon</div>
+      <div class="legend-item"><div class="legend-dot c3"></div> Mon Sept 7 — Atchafalaya Basin</div>
+      <div class="legend-item"><div class="legend-dot c4"></div> Tue Sept 8 — Jackson, MS</div>
+      <div class="legend-item"><div class="legend-dot c5"></div> Wed Sept 9 — New Orleans</div>
+    </div>
+
+    <div class="day-card" onclick="flyTo(30.4121, -91.1837, 13)">
+      <div class="day-header"><div class="day-dot c1"></div>SAT SEPT 5 — BATON ROUGE</div>
+      <div class="day-body">
+        <div class="stop"><div class="stop-num">1</div><div>Arrive BR afternoon → check in</div></div>
+        <div class="stop"><div class="stop-num">2</div><div>Louie's Café — dinner near LSU</div></div>
+        <div class="stop"><div class="stop-num">3</div><div>🏈 LSU vs Clemson night game — Tiger Stadium</div></div>
+      </div>
+    </div>
+
+    <div class="day-card" onclick="flyTo(30.4490, -91.1874, 13)">
+      <div class="day-header"><div class="day-dot c2"></div>SUN SEPT 6 — BATON ROUGE</div>
+      <div class="day-body">
+        <div class="stop"><div class="stop-num">1</div><div>⛪ Church with Kyla — morning</div></div>
+        <div class="stop"><div class="stop-num">2</div><div>Old State Capitol or Rural Life Museum</div></div>
+        <div class="stop"><div class="stop-num">3</div><div>🍽 Dinner: Latil's Landing, Darrow</div></div>
+        <div class="stop"><div class="stop-num">4</div><div>Drive to houseboat — check in</div></div>
+      </div>
+    </div>
+
+    <div class="day-card" onclick="flyTo(30.3180, -91.7876, 11)">
+      <div class="day-header"><div class="day-dot c3"></div>MON SEPT 7 — ATCHAFALAYA</div>
+      <div class="day-body">
+        <div class="stop"><div class="stop-num">1</div><div>☀️ Sunrise on houseboat deck</div></div>
+        <div class="stop"><div class="stop-num">2</div><div>🐊 Atchafalaya Basin boat tour — McGee's Lodge, Henderson</div></div>
+        <div class="stop"><div class="stop-num">3</div><div>Kayak bayou corridor</div></div>
+        <div class="stop"><div class="stop-num">4</div><div>🍤 Dinner: Robin's Restaurant, Henderson</div></div>
+        <div class="stop"><div class="stop-num">5</div><div>🚗 Evening drive → Jackson, MS</div></div>
+      </div>
+    </div>
+
+    <div class="day-card" onclick="flyTo(32.2988, -90.1848, 13)">
+      <div class="day-header"><div class="day-dot c4"></div>TUE SEPT 8 — JACKSON, MS</div>
+      <div class="day-body">
+        <div class="stop"><div class="stop-num">1</div><div>✊ Mississippi Civil Rights Museum</div></div>
+        <div class="stop"><div class="stop-num">2</div><div>🏠 Medgar Evers Home & Museum</div></div>
+        <div class="stop"><div class="stop-num">3</div><div>🐷 Big Apple Inn — Farish Street lunch</div></div>
+        <div class="stop"><div class="stop-num">4</div><div>🎸 Fondren District — afternoon</div></div>
+        <div class="stop"><div class="stop-num">5</div><div>🎷 Drive to New Orleans — Frenchmen Street night</div></div>
+      </div>
+    </div>
+
+    <div class="day-card" onclick="flyTo(29.9627, -90.0566, 14)">
+      <div class="day-header"><div class="day-dot c5"></div>WED SEPT 9 — NEW ORLEANS</div>
+      <div class="day-body">
+        <div class="stop"><div class="stop-num">1</div><div>☕ Congregation Coffee, Marigny</div></div>
+        <div class="stop"><div class="stop-num">2</div><div>Tremé neighborhood walk</div></div>
+        <div class="stop"><div class="stop-num">3</div><div>St. Louis Cemetery #1</div></div>
+        <div class="stop"><div class="stop-num">4</div><div>🍗 Dooky Chase's — legendary lunch</div></div>
+        <div class="stop"><div class="stop-num">5</div><div>French Quarter + Garden District</div></div>
+        <div class="stop"><div class="stop-num">6</div><div>🍷 Bacchanal Wine — evening</div></div>
+        <div class="stop"><div class="stop-num">7</div><div>🎷 Frenchmen Street / Spotted Cat</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="map"></div>
+</div>
+
+<script>
+const map = L.map('map').setView([31.1, -90.9], 7);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+  maxZoom: 19
+}).addTo(map);
+
+function colorIcon(color, label) {
+  return L.divIcon({
+    className: '',
+    html: `<div style="
+      background:${color};
+      border:2px solid white;
+      border-radius:50%;
+      width:28px;height:28px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:bold;color:white;
+      box-shadow:0 2px 6px rgba(0,0,0,0.5);
+      font-family:Georgia,serif;
+    ">${label}</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -16]
+  });
+}
+
+const stops = [
+  // Day 1 - Red
+  { lat: 30.4121, lng: -91.1837, color: '#e63946', label: '🏈', day: 'Sat Sept 5', name: 'Tiger Stadium — LSU vs Clemson', desc: 'Night game. 102,000 fans, Death Valley atmosphere. One of the great college football experiences on earth.' },
+  { lat: 30.4515, lng: -91.1871, color: '#e63946', label: '1', day: 'Sat Sept 5', name: 'Baton Rouge — Home Base', desc: 'Arrive afternoon. Stay near LSU or downtown BR. Louie\'s Café for dinner before the game (open since 1941).' },
+
+  // Day 2 - Orange
+  { lat: 30.4490, lng: -91.1874, color: '#f4a261', label: '2', day: 'Sun Sept 6', name: 'Old State Capitol', desc: 'Gothic castle on the Mississippi. Mark Twain called it a "monstrosity." Worth seeing. Quiet on a Sunday.' },
+  { lat: 30.3960, lng: -91.1500, color: '#f4a261', label: '2', day: 'Sun Sept 6', name: 'LSU Rural Life Museum', desc: '25 acres of authentic 18th/19th century Louisiana plantation life. Underrated, genuinely fascinating.' },
+  { lat: 30.1167, lng: -90.9167, color: '#f4a261', label: '🍽', day: 'Sun Sept 6', name: 'Latil\'s Landing — Darrow', desc: 'Historic plantation restaurant on River Road. James Beard quality. Make a reservation. Sunday dinner before heading west.' },
+
+  // Day 3 - Teal
+  { lat: 29.9496, lng: -91.2032, color: '#2a9d8f', label: '🏠', day: 'Mon Sept 7', name: 'Houseboat — Pierre Part / Morgan City', desc: 'Sleep on the Atchafalaya. Rustic, authentic, alligators nearby. Sunrise from the deck is mandatory. Departing evening of the 7th for Jackson, MS.' },
+  { lat: 30.3180, lng: -91.7876, color: '#2a9d8f', label: '🐊', day: 'Mon Sept 7', name: 'McGee\'s Lodge — Henderson', desc: 'Atchafalaya Basin boat tour. Largest swamp in the US. Cypress trees, Spanish moss, alligators, herons. Go with a small-group operator.' },
+  { lat: 30.3120, lng: -91.7950, color: '#2a9d8f', label: '🍤', day: 'Mon Sept 7', name: "Robin's Restaurant — Henderson", desc: "Unpretentious Cajun food that locals actually eat. Crawfish étouffée is legendary. No tourists, all flavor." },
+
+  // Day 4 - Blue (Jackson, MS)
+  { lat: 32.2988, lng: -90.1848, color: '#457b9d', label: '✊', day: 'Tue Sept 8', name: 'Mississippi Civil Rights Museum', desc: 'One of the best civil rights museums in the country. Eight galleries tracing Mississippi\'s role in the movement from slavery through Freedom Summer. Budget 2+ hours.' },
+  { lat: 32.3027, lng: -90.1969, color: '#457b9d', label: '🐷', day: 'Tue Sept 8', name: 'Big Apple Inn — Farish Street', desc: 'Operating since 1939. Pig ear sandwiches and smoked sausage for $2. A Jackson institution on the historic Farish Street.' },
+  { lat: 32.3045, lng: -90.1855, color: '#457b9d', label: '🏠', day: 'Tue Sept 8', name: 'Medgar Evers Home & Museum', desc: 'The actual house where NAACP field secretary Medgar Evers was assassinated in 1963. Small, powerful, deeply moving. Call ahead to confirm hours.' },
+  { lat: 32.3230, lng: -90.1648, color: '#457b9d', label: '🎸', day: 'Tue Sept 8', name: 'Fondren District — Afternoon', desc: 'Jackson\'s arts-and-indie neighborhood. Independent galleries, vintage shops, coffee, bars. Leave by 4pm for the drive south to New Orleans.' },
+
+  // Day 5 - Purple
+  { lat: 29.9627, lng: -90.0566, color: '#6a4c93', label: '🎷', day: 'Wed Sept 9', name: 'Frenchmen Street — Marigny', desc: 'Where locals actually go for jazz. Walk bar to bar, live music everywhere, no cover most nights. Better than Bourbon Street in every way.' },
+  { lat: 29.9649, lng: -90.0695, color: '#6a4c93', label: '5', day: 'Wed Sept 9', name: 'Tremé Neighborhood', desc: "Oldest Black neighborhood in America. Birthplace of jazz. Walk it, feel it. More real than the Quarter." },
+  { lat: 29.9644, lng: -90.0726, color: '#6a4c93', label: '⚰️', day: 'Wed Sept 9', name: "St. Louis Cemetery #1", desc: 'Above-ground tombs, genuinely eerie, guided tour required. One of the most unique spots in America.' },
+  { lat: 29.9695, lng: -90.0773, color: '#6a4c93', label: '🍗', day: 'Wed Sept 9', name: "Dooky Chase's Restaurant", desc: "Legendary institution in Tremé. Leah Chase fed MLK, Ray Charles, and Obama. Order the fried chicken. This is a pilgrimage." },
+  { lat: 29.9511, lng: -90.0715, color: '#6a4c93', label: '🍷', day: 'Wed Sept 9', name: 'Bacchanal Wine — Bywater', desc: 'Outdoor wine bar, live music in the courtyard. The perfect Louisiana evening. Jen will love it.' },
+];
+
+const routeCoords = [
+  [30.4515, -91.1871],  // Baton Rouge
+  [30.3180, -91.7876],  // Henderson/Atchafalaya
+  [29.9496, -91.2032],  // Pierre Part houseboat
+  [32.2988, -90.1848],  // Jackson, MS
+  [29.9511, -90.0715],  // New Orleans
+];
+
+L.polyline(routeCoords, {
+  color: '#fdd023',
+  weight: 2.5,
+  opacity: 0.6,
+  dashArray: '8, 6'
+}).addTo(map);
+
+stops.forEach(s => {
+  const marker = L.marker([s.lat, s.lng], { icon: colorIcon(s.color, s.label) }).addTo(map);
+  marker.bindPopup(`
+    <div class="popup-title">${s.name}</div>
+    <div class="popup-day">${s.day}</div>
+    <div class="popup-desc">${s.desc}</div>
+  `, { maxWidth: 220 });
+});
+
+// MSY Airport
+L.marker([29.9934, -90.2580], {
+  icon: colorIcon('#888', '✈️')
+}).addTo(map).bindPopup(`
+  <div class="popup-title">Louis Armstrong Airport (MSY)</div>
+  <div class="popup-day">Thu Sept 10</div>
+  <div class="popup-desc">Fly home to SLC. Give yourself 90 min from French Quarter. Grab beignets at Café Du Monde first.</div>
+`);
+
+function flyTo(lat, lng, zoom) {
+  map.flyTo([lat, lng], zoom, { duration: 1.2 });
+}
+</script>
+</body>
+</html>
