@@ -152,9 +152,8 @@
       <div class="day-body">
         <div class="stop"><div class="stop-num">1</div><div>⛪ Church with Kyla — morning</div></div>
         <div class="stop"><div class="stop-num">2</div><div>Old State Capitol or Rural Life Museum</div></div>
-        <div class="stop"><div class="stop-num">3</div><div>🏰 Destrehan Plantation — afternoon</div></div>
-        <div class="stop"><div class="stop-num">4</div><div>🍽 Dinner: Latil's Landing, Darrow</div></div>
-        <div class="stop"><div class="stop-num">5</div><div>Drive to houseboat — check in</div></div>
+        <div class="stop"><div class="stop-num">3</div><div>🍽 Dinner: Latil's Landing, Darrow</div></div>
+        <div class="stop"><div class="stop-num">4</div><div>Drive to houseboat — check in</div></div>
       </div>
     </div>
 
@@ -232,7 +231,7 @@ const stops = [
   // Day 2 - Orange
   { lat: 30.4490, lng: -91.1874, color: '#f4a261', label: '2', day: 'Sun Sept 6', name: 'Old State Capitol', desc: 'Gothic castle on the Mississippi. Mark Twain called it a "monstrosity." Worth seeing. Quiet on a Sunday.' },
   { lat: 30.3960, lng: -91.1500, color: '#f4a261', label: '2', day: 'Sun Sept 6', name: 'LSU Rural Life Museum', desc: '25 acres of authentic 18th/19th century Louisiana plantation life. Underrated, genuinely fascinating.' },
-  { lat: 29.9462, lng: -90.3537, color: '#f4a261', label: '🏰', day: 'Sun Sept 6', name: 'Destrehan Plantation', desc: 'One of the oldest intact plantation homes in the lower Mississippi Valley (built 1787). Massive live oaks, original outbuildings, and a powerful history including the 1811 German Coast Uprising. On the route from Baton Rouge toward the houseboat.' },
+  { lat: 29.9462, lng: -90.3537, color: '#888', label: '🏰', day: 'Thu Sept 10', name: 'Destrehan Plantation', desc: 'Morning stop before heading to MSY. One of the oldest intact plantation homes in the lower Mississippi Valley (built 1787). Massive live oaks, original outbuildings, powerful history including the 1811 German Coast Uprising. Then straight to the airport — ~30 min to MSY.' },
   { lat: 30.1167, lng: -90.9167, color: '#f4a261', label: '🍽', day: 'Sun Sept 6', name: 'Latil\'s Landing — Darrow', desc: 'Historic plantation restaurant on River Road. James Beard quality. Make a reservation. Sunday dinner before heading west.' },
 
   // Day 3 - Teal
@@ -256,10 +255,11 @@ const stops = [
 
 const routeCoords = [
   [30.4515, -91.1871],  // Baton Rouge
-  [29.9462, -90.3537],  // Destrehan Plantation
   [29.9496, -91.2032],  // Pierre Part houseboat
   [32.2988, -90.1848],  // Jackson, MS
   [29.9511, -90.0715],  // New Orleans
+  [29.9462, -90.3537],  // Destrehan Plantation
+  [29.9934, -90.2580],  // MSY Airport
 ];
 
 L.polyline(routeCoords, {
