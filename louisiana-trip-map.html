@@ -136,6 +136,8 @@
       <div class="legend-item"><div class="legend-dot c3"></div> Mon Sept 7 — Atchafalaya Basin</div>
       <div class="legend-item"><div class="legend-dot c4"></div> Tue Sept 8 — Jackson, MS</div>
       <div class="legend-item"><div class="legend-dot c5"></div> Wed Sept 9 — New Orleans</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#aaa"></div> Thu Sept 10 — Destrehan + Fly Home</div>
+      <div style="margin-top:8px;font-size:0.68rem;color:#6a8;">&#9135;&#9135; Line color = travel day</div>
     </div>
 
     <div class="day-card" onclick="flyTo(30.4121, -91.1837, 13)">
@@ -254,24 +256,39 @@ const stops = [
   { lat: 29.9511, lng: -90.0715, color: '#6a4c93', label: '🍷', day: 'Wed Sept 9', name: 'Bacchanal Wine — Bywater', desc: 'Outdoor wine bar, live music in the courtyard. The perfect Louisiana evening. Jen will love it.' },
 ];
 
-const routeCoords = [
+function dayLine(coords, color) {
+  L.polyline(coords, { color, weight: 2.5, opacity: 0.75, dashArray: '8, 6' }).addTo(map);
+}
+
+// Day 2 — Sun Sept 6 — Orange
+dayLine([
   [30.4515, -91.1871],  // Baton Rouge
   [30.4850, -90.9450],  // Denham Springs LDS Chapel
   [30.4515, -91.1871],  // back to BR
   [30.1167, -90.9167],  // Latil's Landing, Darrow
   [29.9496, -91.2032],  // Pierre Part houseboat
+], '#f4a261');
+
+// Day 3 — Mon Sept 7 — Teal
+dayLine([
+  [29.9496, -91.2032],  // Pierre Part houseboat
+  [29.6985, -91.2088],  // Cajun Man's Swamp Tours
+  [29.9496, -91.2032],  // back to houseboat
   [32.2988, -90.1848],  // Jackson, MS
+], '#2a9d8f');
+
+// Day 4 — Tue Sept 8 — Blue
+dayLine([
+  [32.2988, -90.1848],  // Jackson, MS
+  [29.9511, -90.0715],  // New Orleans
+], '#457b9d');
+
+// Thu Sept 10 — Gray (departure)
+dayLine([
   [29.9511, -90.0715],  // New Orleans
   [29.9462, -90.3537],  // Destrehan Plantation
   [29.9934, -90.2580],  // MSY Airport
-];
-
-L.polyline(routeCoords, {
-  color: '#fdd023',
-  weight: 2.5,
-  opacity: 0.6,
-  dashArray: '8, 6'
-}).addTo(map);
+], '#aaaaaa');
 
 stops.forEach(s => {
   const marker = L.marker([s.lat, s.lng], { icon: colorIcon(s.color, s.label) }).addTo(map);
